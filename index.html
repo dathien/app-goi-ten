@@ -1921,58 +1921,7 @@ window.LinkCodecV741={
 .question-workflow-v767,.adaptive-bank-note-v721,.question-image-note-v719{display:none!important}
 .math-live-preview-v737,.question-bank-actions-v719{margin-top:6px!important}
 @media(max-width:520px){#v767ManagerSlot .v747-top{flex-wrap:wrap!important}#v767ManagerSlot .v747-top label{width:100%!important;justify-content:space-between!important}#v767ManagerSlot #v747Subject{width:65%!important}}
-</style><style id="v793-motion-system">
-@keyframes v793Bg{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-12px,0) scale(1.04)}}
-@keyframes v793Rise{0%{opacity:0;transform:translateY(24px) scale(.97)}100%{opacity:1;transform:none}}
-@keyframes v793Float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
-@keyframes v793Breathe{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.035);filter:brightness(1.12)}}
-@keyframes v793Glow{0%,100%{box-shadow:0 12px 28px rgba(37,99,235,.16)}50%{box-shadow:0 16px 42px rgba(37,99,235,.34)}}
-@keyframes v793Sweep{0%{transform:translateX(-180%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
-@keyframes v793Bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes v793PulseRing{0%{box-shadow:0 0 0 0 rgba(37,99,235,.28)}70%{box-shadow:0 0 0 14px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
-@keyframes v793Pop{0%{opacity:0;transform:scale(.72)}65%{opacity:1;transform:scale(1.08)}100%{transform:scale(1)}}
-@keyframes v793Shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
-@keyframes v793Score{0%{transform:scale(1)}35%{transform:scale(1.32)}100%{transform:scale(1)}}
-@keyframes v793Particle{0%{transform:translate3d(0,110vh,0) scale(.5);opacity:0}10%{opacity:.45}90%{opacity:.25}100%{transform:translate3d(var(--drift),-15vh,0) scale(1.15);opacity:0}}
-body::before{animation:v793Bg 11s ease-in-out infinite!important}
-.screen.active .shell>.glass,.screen.active .shell>.setup-grid,.screen.active .shell>.topbar,.screen.active .shell>.stats,.screen.active .shell>.game-grid,.screen.active .shell>.section-row{animation:v793Rise .55s cubic-bezier(.2,.8,.2,1) both}
-.screen.active .shell>.glass:nth-child(2),.screen.active .shell>.stats{animation-delay:.08s}.screen.active .shell>.setup-grid,.screen.active .shell>.game-grid{animation-delay:.14s}
-.game-card{position:relative;overflow:hidden;animation:v793Glow 3.2s ease-in-out infinite!important;transition:transform .22s ease,filter .22s ease!important}
-.game-card:nth-child(2n){animation-delay:.45s!important}.game-card:nth-child(3n){animation-delay:.9s!important}
-.game-card:hover{transform:translateY(-9px) scale(1.025)!important;filter:brightness(1.08)}
-.game-card::before{content:"";position:absolute;z-index:2;top:-30%;left:-35%;width:16%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:translateX(-180%) skewX(-18deg);pointer-events:none;animation:v793Sweep 4.8s ease-in-out infinite}
-.game-card:nth-child(2)::before{animation-delay:.8s}.game-card:nth-child(3)::before{animation-delay:1.6s}.game-card:nth-child(4)::before{animation-delay:2.4s}.game-card:nth-child(5)::before{animation-delay:3.2s}.game-card:nth-child(6)::before{animation-delay:4s}
-.game-icon{display:inline-block;animation:v793Float 2.3s ease-in-out infinite!important;transform-origin:center}
-.game-card:nth-child(2) .game-icon{animation-delay:.25s!important}.game-card:nth-child(3) .game-icon{animation-delay:.5s!important}.game-card:nth-child(4) .game-icon{animation-delay:.75s!important}.game-card:nth-child(5) .game-icon{animation-delay:1s!important}.game-card:nth-child(6) .game-icon{animation-delay:1.25s!important}
-.brand{background-size:220% 100%!important;animation:v793Brand 5s linear infinite!important}@keyframes v793Brand{0%{background-position:0 50%}100%{background-position:220% 50%}}
-.btn.green,#enterBtn,#playBtn{animation:v793PulseRing 2.2s ease-out infinite}
-.stat b,.count{display:inline-block;animation:v793Breathe 2.8s ease-in-out infinite}
-.badge{animation:v793Bob 2s ease-in-out infinite}
-.result.show,.led.show,.modal.show .modal-card{animation:v793Pop .48s cubic-bezier(.2,.9,.25,1)!important}
-.result.show .result-name,#result.v781-question-mode #resultName{animation:v793Pop .52s cubic-bezier(.2,.9,.25,1)!important}
-#result.v781-question-mode .v781-qcard{animation:v793Rise .42s ease both!important}
-#result.v781-question-mode .v781-option{transition:transform .16s ease,filter .16s ease!important}
-#result.v781-question-mode .v781-option:hover{transform:translateX(7px) scale(1.012)!important;filter:brightness(1.08)}
-.v793-score{animation:v793Score .45s ease!important}.v793-wrong{animation:v793Shake .4s ease!important}.v793-pop{animation:v793Pop .45s ease!important}
-.v793-particles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}.v793-particle{position:absolute;bottom:-30px;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.32);box-shadow:0 0 12px rgba(46,230,255,.45);animation:v793Particle var(--dur) linear infinite;animation-delay:var(--delay)}
-.app{position:relative;z-index:1}
-@media(prefers-reduced-motion:reduce){.v793-particle{display:none!important}body::before,.game-card,.game-icon,.brand,.btn.green,#enterBtn,#playBtn,.stat b,.count,.badge{animation:none!important}}
-</style><script id="v793-motion-controller">
-(function(){'use strict';
-function restart(el,cls){if(!el)return;el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(function(){el.classList.remove(cls)},650)}
-function init(){
-  if(!document.querySelector('.v793-particles')){var p=document.createElement('div');p.className='v793-particles';for(var i=0;i<18;i++){var d=document.createElement('i');d.className='v793-particle';d.style.left=((i*37)%97)+'%';d.style.setProperty('--dur',(8+(i%6)*1.7)+'s');d.style.setProperty('--delay',(-i*.73)+'s');d.style.setProperty('--drift',((-40+(i*23)%80))+'px');p.appendChild(d)}document.body.prepend(p)}
-  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.btn,[role="button"]');if(b)restart(b,'v793-pop')},true);
-  var prev={};
-  new MutationObserver(function(ms){ms.forEach(function(m){var el=m.target.nodeType===1?m.target:m.target.parentElement;if(!el)return;var id=el.id||'';var cl=String(el.className||'');var t=(el.textContent||'').trim();
-    if(/score|point|điểm/i.test(id+' '+cl) && prev[id+cl]!==undefined && prev[id+cl]!==t) restart(el,'v793-score');
-    if(/sai|wrong|không đúng/i.test(t)) restart(el,'v793-wrong'); else if(/đúng|correct|chính xác|học sinh được chọn/i.test(t)) restart(el,'v793-pop');
-    prev[id+cl]=t;
-  })}).observe(document.body,{subtree:true,childList:true,characterData:true});
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script></head><body><style id="v758-subject-dialog-style">
+</style></head><body><style id="v758-subject-dialog-style">
 #v758SubjectDialog{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(20,37,62,.48);backdrop-filter:blur(3px)}
 #v758SubjectDialog.v758-visible{display:flex}
 #v758SubjectDialog .v758-panel{width:min(100%,460px);max-height:calc(100dvh - 36px);overflow:auto;box-sizing:border-box;border-radius:20px;background:#fff;box-shadow:0 24px 70px rgba(18,35,60,.25);padding:24px;color:#1b2e49;font-family:inherit}
@@ -3434,7 +3383,49 @@ escHtml,
 ].join('\n');
 
   const css=`*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 20% 0%,#173d72 0,#07142f 42%,#030916 100%);color:#fff}body{padding:18px}.app{max-width:920px;margin:0 auto}.brand{font-weight:900;font-size:clamp(25px,5vw,42px);margin:10px 0}.sub{color:#b9c9e8;line-height:1.5}.card{background:rgba(8,24,58,.82);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:24px;box-shadow:0 18px 55px rgba(0,0,0,.25);margin-top:18px}.screen{display:none}.screen.active{display:block}.label{font-weight:800;margin:14px 0 8px;display:block}input{width:100%;padding:15px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;font-size:18px;outline:none}.btn{border:0;border-radius:15px;padding:13px 19px;font-weight:900;font-size:16px;color:#fff;background:linear-gradient(135deg,#2587ff,#7b39ff);cursor:pointer}.btn.green{background:linear-gradient(135deg,#12b981,#25d9c7)}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.pill{display:inline-block;padding:8px 13px;border-radius:999px;background:rgba(46,230,255,.12);border:1px solid rgba(46,230,255,.3);font-weight:900}.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.timer{font-size:28px;font-weight:1000}.timer.danger{color:#ff6470}.qtext{font-size:clamp(20px,3vw,28px);font-weight:800;line-height:1.5;padding:20px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}.qmedia{display:none;margin:14px auto 0;text-align:center}.qmedia.show{display:block}.qmedia img{max-width:100%;max-height:360px;object-fit:contain;background:#fff;border-radius:16px;padding:8px}.options{display:grid;gap:12px;margin-top:16px}.option{display:flex;align-items:flex-start;gap:12px;text-align:left;width:100%;padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-size:18px;cursor:pointer}.option:disabled{cursor:default}.option.correct{border-color:#20d99a;background:rgba(18,185,129,.22)}.option.wrong{border-color:#ff5d67;background:rgba(255,93,103,.2)}.letter{min-width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.13);font-weight:1000}.feedback{min-height:32px;margin-top:12px;font-size:17px}.actions{display:flex;justify-content:center;gap:10px;margin-top:14px}.score{font-size:clamp(58px,12vw,100px);font-weight:1000;text-align:center;margin:8px 0}.result-title{text-align:center;font-size:26px;font-weight:1000}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:15px;text-align:center;border-radius:15px;background:rgba(255,255,255,.06)}.stat b{display:block;font-size:28px}.small{color:#b9c9e8;font-size:14px;line-height:1.5}.table-wrap{overflow:auto;margin-top:16px}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,.12);text-align:center}.ok{color:#55f3a5}.warn{color:#ffd95a}@media(max-width:650px){body{padding:10px}.card{padding:16px;border-radius:18px}.stats{grid-template-columns:1fr}.qtext{font-size:19px}.option{font-size:16px}.top{align-items:flex-start;flex-direction:column}}`;
-  return '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>'+escapeTitle(safeTitle)+' – Học sinh</title><style>'+css+'</style><script>'+mjConfig+'<\/script><script id="MathJax-script">'+mjSource+'<\/script></head><body><div class="app"><div class="student-nav"><button class="btn back" id="backBtn">← Quay lại</button></div><div class="brand">🎓 <span id="title">'+escapeTitle(safeTitle)+'</span></div><div class="sub">Bài làm cá nhân • Mỗi học sinh chỉ được 1 lượt • Câu hỏi và đáp án được đảo tự động.</div><section id="start" class="screen active"><div class="card"><div class="top"><h2>👋 THAM GIA</h2><span class="pill" id="available">—</span></div><label class="label" for="studentName">Họ và tên</label><input id="studentName" autocomplete="name" autocapitalize="words" enterkeyhint="done" placeholder="Nhập họ và tên của em"><div class="small" style="margin-top:10px">Sau khi bắt đầu, em không thể làm lại lượt này trên thiết bị/trình duyệt này.</div><div class="actions"><button class="btn green" id="startBtn">🚀 BẮT ĐẦU</button></div><div id="msg" class="small" style="margin-top:12px"></div></div></section><section id="quiz" class="screen"><div class="card"><div class="quiz-head"><div><b id="progress">Câu 1/10</b><div class="small">Chọn 1 đáp án đúng</div></div><div id="timerWrap" class="pill">⏱️ <span id="timer">45</span>s</div></div><div id="qtext" class="qtext"></div><div id="qmedia" class="qmedia"></div><div id="options" class="options"></div><div id="feedback" class="feedback"></div><div class="actions"><button class="btn" id="nextBtn" style="display:none">➡️ Câu tiếp theo</button></div></div></section><section id="result" class="screen"><div class="card"><div class="result-title">🎉 ĐÃ HOÀN THÀNH</div><div id="resultName" class="small" style="text-align:center;font-size:18px;margin-top:6px"></div><div id="finalScore" class="score">0 / 0</div><div class="stats"><div class="stat"><b id="finalCorrect">0</b>Đúng</div><div class="stat"><b id="finalWrong">0</b>Sai</div><div class="stat"><b id="finalUnanswered">0</b>Chưa trả lời</div></div><div class="small" style="margin-top:16px;text-align:center">📸 Hãy chụp màn hình kết quả này để lưu trên điện thoại.</div><div class="table-wrap"><table><thead><tr><th>Câu</th><th>Em chọn</th><th>Đáp án đúng</th><th>Kết quả</th></tr></thead><tbody id="answerRows"></tbody></table></div><div class="small warn" style="margin-top:14px;text-align:center">🔒 Lượt làm đã được chốt. Không có lượt làm lại.</div></div></section></div><script>'+studentScript+'<\/script></body></html>';
+  return '<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>'+escapeTitle(safeTitle)+' – Học sinh</title><style>'+css+'</style><script>'+mjConfig+'<\/script><script id="MathJax-script">'+mjSource+'<\/script>
+<style id="v794-motion-css">
+/* V7.94: motion layer only; no layout/color redesign */
+#v794MotionCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.48}
+.app,.screen{position:relative;z-index:1}
+.v794-float{will-change:transform}
+.v794-shine{position:relative;overflow:hidden!important}
+.v794-shine::before{content:"";position:absolute;z-index:5;top:-45%;left:-28%;width:13%;height:190%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:translateX(-220%) skewX(-18deg);animation:v794Sweep 3.8s ease-in-out infinite;pointer-events:none}
+@keyframes v794Sweep{0%,35%{transform:translateX(-220%) skewX(-18deg)}70%,100%{transform:translateX(900%) skewX(-18deg)}}
+.v794-pulse{animation:v794Pulse 1.8s ease-in-out infinite!important}
+@keyframes v794Pulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.045);filter:brightness(1.13);box-shadow:0 0 0 9px rgba(46,230,255,.08),0 10px 30px rgba(46,230,255,.22)}}
+.v794-click{animation:v794Click .34s cubic-bezier(.2,.9,.2,1)!important}@keyframes v794Click{0%{transform:scale(1)}45%{transform:scale(.91)}100%{transform:scale(1.04)}}
+.v794-reveal{animation:v794Reveal .55s cubic-bezier(.15,.9,.2,1)!important}@keyframes v794Reveal{0%{opacity:0;transform:translateY(20px) scale(.82)}70%{opacity:1;transform:translateY(-4px) scale(1.06)}100%{transform:none}}
+.v794-scorepop{animation:v794Score .5s ease!important}@keyframes v794Score{0%,100%{transform:scale(1)}45%{transform:scale(1.38) rotate(-2deg)}}
+</style>
+<script id="v794-motion-engine">
+(function(){'use strict';
+var t0=performance.now(), lastScan=0, nodes=[];
+function canvasMotion(){
+ var c=document.createElement('canvas');c.id='v794MotionCanvas';document.body.prepend(c);var x=c.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W=0,H=0;
+ var p=Array.from({length:34},function(_,i){return {x:(i*73%997)/997,y:(i*131%991)/991,r:1.2+(i%4)*.65,v:.018+(i%7)*.003,a:.10+(i%5)*.035,dx:Math.sin(i*2.1)*.018}});
+ function resize(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';x.setTransform(dpr,0,0,dpr,0,0)} resize();addEventListener('resize',resize);
+ function draw(now){x.clearRect(0,0,W,H);p.forEach(function(q,i){q.y-=q.v/60;q.x+=q.dx/60;if(q.y<-.03)q.y=1.03;if(q.x<-.03)q.x=1.03;if(q.x>1.03)q.x=-.03;var px=q.x*W,py=q.y*H;x.beginPath();x.arc(px,py,q.r*(1+.25*Math.sin(now/700+i)),0,Math.PI*2);x.fillStyle='rgba(255,255,255,'+q.a+')';x.shadowBlur=10;x.shadowColor='rgba(46,230,255,.45)';x.fill()});requestAnimationFrame(draw)}requestAnimationFrame(draw)
+}
+function scan(){
+ nodes=Array.from(document.querySelectorAll('.game-icon,.game-card .icon,.game-card [class*="icon"],.badge,.stat b,.count')).slice(0,80);
+ document.querySelectorAll('.game-card').forEach(function(e){e.classList.add('v794-shine')});
+ ['#enterBtn','#playBtn','.btn.green'].forEach(function(sel){document.querySelectorAll(sel).forEach(function(e){e.classList.add('v794-pulse')})});
+}
+function loop(now){
+ if(now-lastScan>1800){scan();lastScan=now}
+ nodes.forEach(function(el,i){if(!el.isConnected)return;var phase=(now-t0)/700+i*.72;var y=Math.sin(phase)*4.5, r=Math.sin(phase*.63)*1.4, s=1+Math.sin(phase*.82)*.018;el.style.transform='translate3d(0,'+y.toFixed(2)+'px,0) rotate('+r.toFixed(2)+'deg) scale('+s.toFixed(3)+')'});
+ requestAnimationFrame(loop)
+}
+function restart(el,cl){if(!el)return;el.classList.remove(cl);void el.offsetWidth;el.classList.add(cl);setTimeout(function(){el.classList.remove(cl)},650)}
+function init(){canvasMotion();scan();requestAnimationFrame(loop);
+ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.btn,[role="button"]');if(b)restart(b,'v794-click')},true);
+ var obs=new MutationObserver(function(ms){ms.forEach(function(m){var e=m.target.nodeType===1?m.target:m.target.parentElement;if(!e)return;var txt=(e.textContent||'').trim(),sig=(e.id||'')+' '+String(e.className||'');if(/result|name|student|winner|selected/i.test(sig)&&txt)restart(e,'v794-reveal');if(/score|point|điểm/i.test(sig))restart(e,'v794-scorepop')})});obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</head><body><div class="app"><div class="student-nav"><button class="btn back" id="backBtn">← Quay lại</button></div><div class="brand">🎓 <span id="title">'+escapeTitle(safeTitle)+'</span></div><div class="sub">Bài làm cá nhân • Mỗi học sinh chỉ được 1 lượt • Câu hỏi và đáp án được đảo tự động.</div><section id="start" class="screen active"><div class="card"><div class="top"><h2>👋 THAM GIA</h2><span class="pill" id="available">—</span></div><label class="label" for="studentName">Họ và tên</label><input id="studentName" autocomplete="name" autocapitalize="words" enterkeyhint="done" placeholder="Nhập họ và tên của em"><div class="small" style="margin-top:10px">Sau khi bắt đầu, em không thể làm lại lượt này trên thiết bị/trình duyệt này.</div><div class="actions"><button class="btn green" id="startBtn">🚀 BẮT ĐẦU</button></div><div id="msg" class="small" style="margin-top:12px"></div></div></section><section id="quiz" class="screen"><div class="card"><div class="quiz-head"><div><b id="progress">Câu 1/10</b><div class="small">Chọn 1 đáp án đúng</div></div><div id="timerWrap" class="pill">⏱️ <span id="timer">45</span>s</div></div><div id="qtext" class="qtext"></div><div id="qmedia" class="qmedia"></div><div id="options" class="options"></div><div id="feedback" class="feedback"></div><div class="actions"><button class="btn" id="nextBtn" style="display:none">➡️ Câu tiếp theo</button></div></div></section><section id="result" class="screen"><div class="card"><div class="result-title">🎉 ĐÃ HOÀN THÀNH</div><div id="resultName" class="small" style="text-align:center;font-size:18px;margin-top:6px"></div><div id="finalScore" class="score">0 / 0</div><div class="stats"><div class="stat"><b id="finalCorrect">0</b>Đúng</div><div class="stat"><b id="finalWrong">0</b>Sai</div><div class="stat"><b id="finalUnanswered">0</b>Chưa trả lời</div></div><div class="small" style="margin-top:16px;text-align:center">📸 Hãy chụp màn hình kết quả này để lưu trên điện thoại.</div><div class="table-wrap"><table><thead><tr><th>Câu</th><th>Em chọn</th><th>Đáp án đúng</th><th>Kết quả</th></tr></thead><tbody id="answerRows"></tbody></table></div><div class="small warn" style="margin-top:14px;text-align:center">🔒 Lượt làm đã được chốt. Không có lượt làm lại.</div></div></section></div><script>'+studentScript+'<\/script></body></html>';
 
 }
 
