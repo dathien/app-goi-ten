@@ -3531,22 +3531,46 @@ if($('#createStudentHtmlBtn'))$('#createStudentHtmlBtn').onclick=createStudentHt
     show('setup');
     if($('#setupMsg'))$('#setupMsg').textContent=`Đã chuyển sang lớp "${current().name}".`;
   }
-  function deleteClass(id){
-    if(classStore.classes.length<=1){alert('Phải giữ lại ít nhất 1 lớp.');return}
-    const c=classStore.classes.find(x=>x.id===id); if(!c)return;
-    if(!confirm(`Xóa lớp "${c.name}" và toàn bộ dữ liệu riêng của lớp này?`))return;
-    classStore.classes=classStore.classes.filter(x=>x.id!==id);
-    if(classStore.currentId===id)classStore.currentId=classStore.classes[0].id;
-    persistStore(); loadCurrentIntoApp(); renderClassManager();
+  function openClassActionModal(mode,id){
+    const modal=$('#mcActionModal'), title=$('#mcActionTitle'), desc=$('#mcActionDesc'), field=$('#mcActionField'), err=$('#mcActionError'), ok=$('#mcActionOk');
+    if(!modal)return;
+    err.textContent=''; modal.dataset.mode=mode; modal.dataset.id=id||'';
+    const c=id?classStore.classes.find(x=>x.id===id):null;
+    if(mode==='create'){
+      title.textContent='Tạo lớp mới'; desc.textContent='Đặt tên ngắn gọn để dễ nhận biết khi chuyển lớp.';
+      field.style.display='block'; field.value=''; field.placeholder='Ví dụ: 10A1, 11A4, 12A5'; ok.textContent='Tạo lớp'; ok.className='btn green';
+    }else if(mode==='rename'){
+      title.textContent='Đổi tên lớp'; desc.textContent='Dữ liệu học sinh, điểm, lượt đã gọi và câu hỏi vẫn được giữ nguyên.';
+      field.style.display='block'; field.value=c?c.name:''; field.placeholder='Nhập tên lớp'; ok.textContent='Lưu tên mới'; ok.className='btn green';
+    }else{
+      title.textContent='Xóa lớp'; desc.innerHTML=`Bạn sắp xóa <b>${esc(c?c.name:'lớp này')}</b> cùng dữ liệu riêng của lớp. Thao tác này không thể hoàn tác.`;
+      field.style.display='none'; ok.textContent='Xóa lớp'; ok.className='btn danger';
+    }
+    modal.classList.add('show'); setTimeout(()=>{if(field.style.display!=='none')field.focus()},30);
   }
-  function renameClass(id){
-    const c=classStore.classes.find(x=>x.id===id);if(!c)return;
-    const n=prompt('Tên lớp mới:',c.name);
-    if(n===null)return;
-    const name=n.trim().slice(0,60);
-    if(!name){alert('Tên lớp không được để trống.');return}
-    c.name=name;persistStore();updateClassLabels();renderClassManager();
+  function closeClassActionModal(){$('#mcActionModal')?.classList.remove('show')}
+  function submitClassAction(){
+    const modal=$('#mcActionModal'); if(!modal)return;
+    const mode=modal.dataset.mode,id=modal.dataset.id,field=$('#mcActionField'),err=$('#mcActionError');
+    const clean=String(field.value||'').trim().slice(0,60);
+    if(mode==='create'||mode==='rename'){
+      if(!clean){err.textContent='Vui lòng nhập tên lớp.';field.focus();return}
+      if(classStore.classes.some(c=>c.id!==id&&c.name.toLowerCase()===clean.toLowerCase())){err.textContent='Tên lớp này đã tồn tại. Vui lòng chọn tên khác.';field.focus();return}
+    }
+    if(mode==='create'){
+      snapshotCurrent(); const c=addClassRecord(clean,false); c.studentsRaw=''; c.students=[]; c.studentsCleared=true; classStore.currentId=c.id;
+      persistStore(); loadCurrentIntoApp(); renderClassManager(); closeClassActionModal(); show('setup');
+      if($('#setupMsg'))$('#setupMsg').textContent=`✓ Đã tạo lớp ${clean}. Hãy nhập hoặc tải danh sách học sinh.`;
+    }else if(mode==='rename'){
+      const c=classStore.classes.find(x=>x.id===id);if(!c)return; c.name=clean;persistStore();updateClassLabels();renderClassManager();closeClassActionModal();
+    }else if(mode==='delete'){
+      if(classStore.classes.length<=1){err.textContent='Phải giữ lại ít nhất 1 lớp.';return}
+      classStore.classes=classStore.classes.filter(x=>x.id!==id); if(classStore.currentId===id)classStore.currentId=classStore.classes[0].id;
+      persistStore();loadCurrentIntoApp();renderClassManager();closeClassActionModal();
+    }
   }
+  function deleteClass(id){openClassActionModal('delete',id)}
+  function renameClass(id){openClassActionModal('rename',id)}
   function openModal(){
     renderClassManager();
     $('#mcModal').classList.add('show');
@@ -3559,31 +3583,17 @@ if($('#createStudentHtmlBtn'))$('#createStudentHtmlBtn').onclick=createStudentHt
       const n=Array.isArray(c.students)&&c.students.length?c.students.length:(c.studentsRaw?c.studentsRaw.split(/\n/).filter(x=>x.trim()).length:0);
       const q=Array.isArray(c.questionBank)?c.questionBank.length:0;
       return `<div class="mc-class-card ${active?'active':''}">
-        <div class="mc-class-main"><div class="mc-class-name">${esc(c.name)}</div>
-        <div class="mc-meta">${n} học sinh • ${q} câu hỏi ${active?'• <b>ĐANG DÙNG</b>':''}</div></div>
+        <div class="mc-class-main"><div class="mc-class-name">📘 ${esc(c.name)}</div>
+        <div class="mc-meta"><span>👥 ${n} học sinh</span><span>🧩 ${q} câu hỏi</span>${active?'<span class="mc-live">● Đang sử dụng</span>':''}</div></div>
         <div class="mc-actions">
-          ${active?'<span class="mc-current-badge">✓ Lớp hiện tại</span>':`<button class="btn green mc-switch" data-id="${c.id}">Dùng lớp này</button>`}
+          ${active?'<span class="mc-current-badge">✓ Đang sử dụng</span>':`<button class="btn green mc-switch" data-id="${c.id}">Chuyển sang lớp này</button>`}
           <button class="btn secondary mc-rename" data-id="${c.id}">✏️ Đổi tên</button>
           <button class="btn danger mc-delete" data-id="${c.id}">🗑️</button>
         </div>
       </div>`;
     }).join('');
   }
-  function createNewClass(){
-    snapshotCurrent();
-    const name=prompt('Nhập tên lớp mới (ví dụ: 12A5, 12A6):','12A5');
-    if(name===null)return;
-    const clean=name.trim().slice(0,60);
-    if(!clean){alert('Tên lớp không được để trống.');return}
-    if(classStore.classes.some(c=>c.name.toLowerCase()===clean.toLowerCase())){alert('Lớp này đã tồn tại. Hãy chọn tên khác.');return}
-    const c=addClassRecord(clean,false);
-    classStore.currentId=c.id;
-    persistStore();
-    loadCurrentIntoApp();
-    renderClassManager();
-    show('setup');
-    if($('#setupMsg'))$('#setupMsg').textContent=`Đã tạo lớp "${clean}". Hãy nhập danh sách học sinh.`;
-  }
+  function createNewClass(){openClassActionModal('create','')}
   function buildUI(){
     const style=document.createElement('style');
     style.textContent=`
@@ -3596,7 +3606,10 @@ if($('#createStudentHtmlBtn'))$('#createStudentHtmlBtn').onclick=createStudentHt
       .mc-class-name{font-size:20px;font-weight:1000;color:#fff}.mc-meta{font-size:13px;color:#b9c9e8;margin-top:4px}
       .mc-actions{display:flex;gap:7px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
       .mc-current-badge{padding:8px 11px;border-radius:999px;background:rgba(85,243,165,.12);border:1px solid rgba(85,243,165,.3);color:#bfffe0;font-size:12px;font-weight:900}
-      .mc-note{padding:12px;border-radius:14px;background:rgba(46,230,255,.08);border:1px dashed rgba(46,230,255,.28);margin-top:12px}
+      .mc-note{padding:12px 14px;border-radius:14px;background:#effbff;border:1px solid #b9e7f3;margin-top:12px;color:#24415f}
+      .mc-class-main{min-width:220px}.mc-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.mc-meta span{background:#f3f7fc;border:1px solid #d9e5f2;border-radius:999px;padding:5px 9px;color:#5d7390}.mc-meta .mc-live{background:#e9fff4;border-color:#a7eccb;color:#087a50;font-weight:900}
+      .mc-class-card{background:#fff!important;border:1px solid #d7e4f2!important;box-shadow:0 7px 20px rgba(22,55,92,.06)}.mc-class-card.active{border:2px solid #3ec7d8!important;background:linear-gradient(135deg,#f9ffff,#f6fbff)!important}.mc-class-name{color:#183b6b!important}.mc-current-badge{background:#e8fff3!important;border-color:#9fe5c2!important;color:#087a50!important}
+      .mc-action-card{width:min(500px,92vw);padding:24px}.mc-action-card h3{margin:0 0 6px;color:#183b6b;font-size:24px}.mc-action-desc{color:#667b96;line-height:1.55;margin-bottom:16px}.mc-action-field{width:100%;box-sizing:border-box;border:1.5px solid #bfd3e8;border-radius:12px;padding:12px 14px;font-size:16px;outline:none}.mc-action-field:focus{border-color:#13a675;box-shadow:0 0 0 3px rgba(19,166,117,.12)}.mc-action-error{min-height:22px;color:#c73535;font-weight:800;font-size:13px;margin-top:7px}.mc-action-buttons{display:flex;justify-content:flex-end;gap:9px;margin-top:12px}
       @media(max-width:650px){.mc-class-card{align-items:flex-start;flex-direction:column}.mc-actions{width:100%;justify-content:flex-start}}
       .mc-toolbar .mc-current[data-mc-current]{
         background:#eef6ff!important;
@@ -3615,13 +3628,17 @@ if($('#createStudentHtmlBtn'))$('#createStudentHtmlBtn').onclick=createStudentHt
     modal.className='modal';modal.id='mcModal';
     modal.innerHTML=`<div class="glass modal-card mc-modal">
       <div class="topbar"><div><h2 style="margin:0">📚 QUẢN LÝ NHIỀU LỚP</h2>
-      <div class="small">Mỗi lớp có danh sách học sinh, điểm, lượt đã gọi và kho câu hỏi riêng.</div></div>
+      <div class="small">Chuyển lớp nhanh, mỗi lớp giữ riêng danh sách học sinh, điểm, lượt đã gọi và kho câu hỏi.</div></div>
       <button class="btn secondary" id="mcClose">Đóng</button></div>
-      <div class="mc-note">💡 <b>Lớp hiện tại:</b> <span data-mc-current-name></span>. Khi đổi lớp, dữ liệu của lớp cũ được giữ nguyên.</div>
+      <div class="mc-note">💡 <b>Lớp đang sử dụng:</b> <span data-mc-current-name></span> · Khi chuyển lớp, dữ liệu lớp hiện tại được tự động giữ nguyên.</div>
       <div class="actions" style="justify-content:flex-start"><button class="btn green" id="mcAdd">➕ Tạo thêm lớp</button></div>
       <div id="mcClassList" class="mc-class-list"></div>
     </div>`;
     document.body.appendChild(modal);
+    const action=document.createElement('div');action.className='modal';action.id='mcActionModal';
+    action.innerHTML=`<div class="glass modal-card mc-action-card"><h3 id="mcActionTitle">Tạo lớp mới</h3><div id="mcActionDesc" class="mc-action-desc"></div><input id="mcActionField" class="mc-action-field" maxlength="60" autocomplete="off"><div id="mcActionError" class="mc-action-error"></div><div class="mc-action-buttons"><button class="btn secondary" id="mcActionCancel">Hủy</button><button class="btn green" id="mcActionOk">Tạo lớp</button></div></div>`;
+    document.body.appendChild(action);
+    $('#mcActionCancel').onclick=closeClassActionModal;$('#mcActionOk').onclick=submitClassAction;$('#mcActionField').addEventListener('keydown',e=>{if(e.key==='Enter')submitClassAction()});action.addEventListener('click',e=>{if(e.target===action)closeClassActionModal()});
     $('#mcClose').onclick=closeModal;$('#mcAdd').onclick=createNewClass;
     modal.addEventListener('click',e=>{
       const b=e.target.closest('button[data-id]');if(!b)return;
@@ -6866,4 +6883,48 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   document.addEventListener('click',function(e){if(e.target&&e.target.id==='playAgainBtn'){var r=document.getElementById('result');if(r)r.classList.remove('v781-question-mode','v782-answered');var q=document.getElementById('questionResult');if(q){q.innerHTML='';delete q.dataset.answered}}},true);
 })();
 </script>
+
+<script id="v786-excel-students-and-polish">
+(function(){'use strict';
+function q(s){return document.querySelector(s)}
+function setMsg(t,ok){const m=q('#setupMsg');if(m){m.textContent=t;m.style.color=ok===false?'#b42318':'#087a50';m.style.fontWeight='800'}}
+function installExcelUI(){
+ const sample=q('#sampleBtn'), input=q('#studentInput'); if(!sample||!input||q('#studentExcelBtn'))return;
+ const btn=document.createElement('button');btn.type='button';btn.className='btn secondary';btn.id='studentExcelBtn';btn.textContent='📊 Tải danh sách Excel';
+ const tmpl=document.createElement('button');tmpl.type='button';tmpl.className='btn secondary';tmpl.id='studentExcelTemplateBtn';tmpl.textContent='⬇ Excel mẫu';
+ const file=document.createElement('input');file.type='file';file.id='studentExcelFile';file.accept='.xlsx,.xls,.csv';file.hidden=true;
+ sample.parentElement.insertBefore(btn,sample.nextSibling);sample.parentElement.insertBefore(tmpl,btn.nextSibling);sample.parentElement.appendChild(file);
+ btn.onclick=()=>file.click(); tmpl.onclick=downloadTemplate; file.onchange=async()=>{if(file.files&&file.files[0])await importFile(file.files[0]);file.value=''};
+}
+function downloadTemplate(){
+ const csv='STT,Họ và tên,Mã học sinh\r\n1,Nguyễn Văn An,01\r\n2,Trần Minh Anh,02\r\n3,Lê Gia Bảo,03\r\n';
+ const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='MAU_DANH_SACH_HOC_SINH.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);setMsg('✓ Đã tải file mẫu. Excel có thể mở và lưu lại thành .xlsx.',true)
+}
+async function unzipEntries(buf){
+ const b=new Uint8Array(buf), dv=new DataView(buf); let eocd=-1;
+ for(let i=b.length-22;i>=Math.max(0,b.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0)throw Error('File XLSX không hợp lệ.'); const total=dv.getUint16(eocd+10,true), cd=dv.getUint32(eocd+16,true); let p=cd,out={};
+ for(let k=0;k<total;k++){if(dv.getUint32(p,true)!==0x02014b50)break;const method=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),el=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true),name=new TextDecoder().decode(b.slice(p+46,p+46+nl));const lnl=dv.getUint16(lo+26,true),lel=dv.getUint16(lo+28,true),start=lo+30+lnl+lel,data=b.slice(start,start+cs);let raw;if(method===0)raw=data;else if(method===8){const ds=new DecompressionStream('deflate-raw');raw=new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(ds)).arrayBuffer())}else{p+=46+nl+el+cl;continue}out[name]=raw;p+=46+nl+el+cl}
+ return out;
+}
+function xmlText(bytes){return new TextDecoder('utf-8').decode(bytes)}
+async function parseXlsx(file){
+ const z=await unzipEntries(await file.arrayBuffer()), parser=new DOMParser(), shared=[];
+ if(z['xl/sharedStrings.xml']){const d=parser.parseFromString(xmlText(z['xl/sharedStrings.xml']),'application/xml');d.querySelectorAll('si').forEach(si=>shared.push(Array.from(si.querySelectorAll('t')).map(t=>t.textContent).join('')))}
+ let sheet=z['xl/worksheets/sheet1.xml']; if(!sheet){const key=Object.keys(z).find(k=>/^xl\/worksheets\/sheet\d+\.xml$/.test(k));sheet=z[key]}
+ if(!sheet)throw Error('Không tìm thấy trang tính trong file Excel.'); const d=parser.parseFromString(xmlText(sheet),'application/xml'), rows=[];
+ d.querySelectorAll('row').forEach(r=>{const vals=[];r.querySelectorAll('c').forEach(c=>{const ref=c.getAttribute('r')||'', letters=(ref.match(/[A-Z]+/)||['A'])[0];let col=0;for(const ch of letters)col=col*26+ch.charCodeAt(0)-64;col--;const t=c.getAttribute('t'),v=c.querySelector('v'),inline=c.querySelector('is');let val='';if(t==='s'&&v)val=shared[Number(v.textContent)]||'';else if(t==='inlineStr'&&inline)val=Array.from(inline.querySelectorAll('t')).map(x=>x.textContent).join('');else if(v)val=v.textContent;vals[col]=String(val||'').trim()});rows.push(vals)});return rows;
+}
+function parseCsv(txt){return txt.replace(/^\ufeff/,'').split(/\r?\n/).filter(x=>x.trim()).map(line=>{const out=[];let cur='',quote=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(quote&&line[i+1]==='"'){cur+='"';i++}else quote=!quote}else if(ch===','&&!quote){out.push(cur.trim());cur=''}else cur+=ch}out.push(cur.trim());return out})}
+function rowsToStudents(rows){
+ if(!rows.length)return[];let start=0,nameCol=1,codeCol=2;const h=rows[0].map(x=>String(x||'').toLowerCase());const hi=h.findIndex(x=>/họ.*tên|ho.*ten|tên học sinh|name/.test(x));if(hi>=0){nameCol=hi;start=1;const ci=h.findIndex(x=>/mã|ma |code|mshs/.test(x));codeCol=ci>=0?ci:-1}else if(rows[0].length===1){nameCol=0;codeCol=-1}
+ const seen=new Set(),out=[];for(let i=start;i<rows.length&&out.length<50;i++){const name=String(rows[i][nameCol]||'').trim();if(!name)continue;const code=codeCol>=0?String(rows[i][codeCol]||'').trim():'';const key=name.toLowerCase()+'|'+code.toLowerCase();if(seen.has(key))continue;seen.add(key);out.push(code?`${name} | ${code}`:name)}return out;
+}
+async function importFile(file){
+ try{let rows;if(/\.csv$/i.test(file.name))rows=parseCsv(await file.text());else rows=await parseXlsx(file);const students=rowsToStudents(rows);if(students.length<2)throw Error('Không tìm thấy đủ học sinh. Hãy dùng cột “Họ và tên”.');q('#studentInput').value=students.join('\n');q('#studentInput').dispatchEvent(new Event('input',{bubbles:true}));try{localStorage.setItem('thienclass_students',q('#studentInput').value)}catch(e){}setMsg(`✓ Đã nhập ${students.length} học sinh từ ${file.name}. Bấm “Vào chơi” để sử dụng danh sách.`,true)}catch(e){setMsg('✕ Không nhập được file: '+(e.message||e),false)}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installExcelUI);else installExcelUI();
+})();
+</script>
+
 </body></html>';
