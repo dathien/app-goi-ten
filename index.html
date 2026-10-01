@@ -6968,4 +6968,110 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+
+<style id="v790-compact-question-screen">
+/* V7.90: Giữ toàn bộ câu hỏi + nút điều khiển trong một màn hình trình chiếu */
+#result.v781-question-mode{
+  max-width:900px!important;
+  margin:6px auto 0!important;
+  padding:10px 14px 12px!important;
+}
+#result.v781-question-mode .small:first-child{
+  margin:0!important;
+  font-size:13px!important;
+  line-height:1.15!important;
+}
+#result.v781-question-mode #resultName{
+  margin:2px 0 7px!important;
+  font-size:clamp(28px,4.2vw,52px)!important;
+  line-height:1.02!important;
+}
+#result.v781-question-mode .actions{margin:5px 0!important}
+#result.v781-question-mode #questionResult{margin:0!important}
+#result.v781-question-mode .v781-qcard{
+  padding:11px 13px!important;
+  border-radius:16px!important;
+}
+#result.v781-question-mode .v789-progress{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0 8px 5px 0!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+}
+#result.v781-question-mode .v781-kicker{
+  display:inline!important;
+  margin:0 0 5px!important;
+  font-size:11.5px!important;
+  line-height:1.15!important;
+}
+#result.v781-question-mode .v781-qtext{
+  font-size:clamp(17px,2vw,24px)!important;
+  line-height:1.25!important;
+  margin:5px 0 9px!important;
+}
+#result.v781-question-mode .v781-options{gap:7px!important}
+#result.v781-question-mode .v781-option{
+  min-height:48px!important;
+  padding:8px 11px!important;
+  border-radius:11px!important;
+  gap:8px!important;
+  line-height:1.2!important;
+}
+#result.v781-question-mode .v781-letter{
+  flex-basis:27px!important;
+  width:27px!important;
+  height:27px!important;
+}
+#result.v781-question-mode .v781-feedback{
+  margin-top:8px!important;
+  padding:7px 10px!important;
+  line-height:1.3!important;
+}
+#result.v781-question-mode .v785-wrong,
+#result.v781-question-mode .v785-correct,
+#result.v781-question-mode .v785-explain{margin-top:4px!important}
+#result.v781-question-mode .v785-explain{
+  padding:6px 9px!important;
+  max-height:76px!important;
+  overflow:auto!important;
+}
+#result.v781-question-mode .v789-turn-actions{
+  margin-top:8px!important;
+  gap:8px!important;
+  position:relative!important;
+  z-index:5!important;
+}
+#result.v781-question-mode .v789-next,
+#result.v781-question-mode .v789-end{
+  padding:9px 15px!important;
+  min-height:40px!important;
+}
+/* Tên học sinh ở khối kết quả phía trên: giảm chiều cao nhưng vẫn là điểm nhấn */
+body:has(#result.v781-question-mode) .winner-name,
+body:has(#result.v781-question-mode) .selected-name,
+body:has(#result.v781-question-mode) #winnerName{
+  padding-top:10px!important;
+  padding-bottom:10px!important;
+  min-height:0!important;
+}
+@media (max-height:800px) and (min-width:701px){
+  #result.v781-question-mode{margin-top:3px!important;padding:8px 12px 10px!important}
+  #result.v781-question-mode #resultName{font-size:clamp(26px,3.8vw,46px)!important;margin-bottom:5px!important}
+  #result.v781-question-mode .v781-qcard{padding:9px 11px!important}
+  #result.v781-question-mode .v781-qtext{font-size:clamp(16px,1.85vw,22px)!important;margin:4px 0 7px!important}
+  #result.v781-question-mode .v781-option{min-height:43px!important;padding:7px 10px!important}
+  #result.v781-question-mode .v781-feedback{margin-top:6px!important;padding:6px 9px!important}
+  #result.v781-question-mode .v785-explain{max-height:62px!important;padding:5px 8px!important}
+  #result.v781-question-mode .v789-turn-actions{margin-top:6px!important}
+}
+@media(max-width:700px){
+  #result.v781-question-mode{padding:8px!important}
+  #result.v781-question-mode .v789-progress,
+  #result.v781-question-mode .v781-kicker{display:block!important;text-align:center!important;margin:0 0 5px!important}
+  #result.v781-question-mode .v781-options{grid-template-columns:1fr!important}
+  #result.v781-question-mode .v781-option{min-height:44px!important}
+}
+</style>
 </body></html>';
