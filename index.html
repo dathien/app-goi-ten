@@ -1921,7 +1921,58 @@ window.LinkCodecV741={
 .question-workflow-v767,.adaptive-bank-note-v721,.question-image-note-v719{display:none!important}
 .math-live-preview-v737,.question-bank-actions-v719{margin-top:6px!important}
 @media(max-width:520px){#v767ManagerSlot .v747-top{flex-wrap:wrap!important}#v767ManagerSlot .v747-top label{width:100%!important;justify-content:space-between!important}#v767ManagerSlot #v747Subject{width:65%!important}}
-</style></head><body><style id="v758-subject-dialog-style">
+</style><style id="v793-motion-system">
+@keyframes v793Bg{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-12px,0) scale(1.04)}}
+@keyframes v793Rise{0%{opacity:0;transform:translateY(24px) scale(.97)}100%{opacity:1;transform:none}}
+@keyframes v793Float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+@keyframes v793Breathe{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.035);filter:brightness(1.12)}}
+@keyframes v793Glow{0%,100%{box-shadow:0 12px 28px rgba(37,99,235,.16)}50%{box-shadow:0 16px 42px rgba(37,99,235,.34)}}
+@keyframes v793Sweep{0%{transform:translateX(-180%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
+@keyframes v793Bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes v793PulseRing{0%{box-shadow:0 0 0 0 rgba(37,99,235,.28)}70%{box-shadow:0 0 0 14px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+@keyframes v793Pop{0%{opacity:0;transform:scale(.72)}65%{opacity:1;transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes v793Shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+@keyframes v793Score{0%{transform:scale(1)}35%{transform:scale(1.32)}100%{transform:scale(1)}}
+@keyframes v793Particle{0%{transform:translate3d(0,110vh,0) scale(.5);opacity:0}10%{opacity:.45}90%{opacity:.25}100%{transform:translate3d(var(--drift),-15vh,0) scale(1.15);opacity:0}}
+body::before{animation:v793Bg 11s ease-in-out infinite!important}
+.screen.active .shell>.glass,.screen.active .shell>.setup-grid,.screen.active .shell>.topbar,.screen.active .shell>.stats,.screen.active .shell>.game-grid,.screen.active .shell>.section-row{animation:v793Rise .55s cubic-bezier(.2,.8,.2,1) both}
+.screen.active .shell>.glass:nth-child(2),.screen.active .shell>.stats{animation-delay:.08s}.screen.active .shell>.setup-grid,.screen.active .shell>.game-grid{animation-delay:.14s}
+.game-card{position:relative;overflow:hidden;animation:v793Glow 3.2s ease-in-out infinite!important;transition:transform .22s ease,filter .22s ease!important}
+.game-card:nth-child(2n){animation-delay:.45s!important}.game-card:nth-child(3n){animation-delay:.9s!important}
+.game-card:hover{transform:translateY(-9px) scale(1.025)!important;filter:brightness(1.08)}
+.game-card::before{content:"";position:absolute;z-index:2;top:-30%;left:-35%;width:16%;height:160%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:translateX(-180%) skewX(-18deg);pointer-events:none;animation:v793Sweep 4.8s ease-in-out infinite}
+.game-card:nth-child(2)::before{animation-delay:.8s}.game-card:nth-child(3)::before{animation-delay:1.6s}.game-card:nth-child(4)::before{animation-delay:2.4s}.game-card:nth-child(5)::before{animation-delay:3.2s}.game-card:nth-child(6)::before{animation-delay:4s}
+.game-icon{display:inline-block;animation:v793Float 2.3s ease-in-out infinite!important;transform-origin:center}
+.game-card:nth-child(2) .game-icon{animation-delay:.25s!important}.game-card:nth-child(3) .game-icon{animation-delay:.5s!important}.game-card:nth-child(4) .game-icon{animation-delay:.75s!important}.game-card:nth-child(5) .game-icon{animation-delay:1s!important}.game-card:nth-child(6) .game-icon{animation-delay:1.25s!important}
+.brand{background-size:220% 100%!important;animation:v793Brand 5s linear infinite!important}@keyframes v793Brand{0%{background-position:0 50%}100%{background-position:220% 50%}}
+.btn.green,#enterBtn,#playBtn{animation:v793PulseRing 2.2s ease-out infinite}
+.stat b,.count{display:inline-block;animation:v793Breathe 2.8s ease-in-out infinite}
+.badge{animation:v793Bob 2s ease-in-out infinite}
+.result.show,.led.show,.modal.show .modal-card{animation:v793Pop .48s cubic-bezier(.2,.9,.25,1)!important}
+.result.show .result-name,#result.v781-question-mode #resultName{animation:v793Pop .52s cubic-bezier(.2,.9,.25,1)!important}
+#result.v781-question-mode .v781-qcard{animation:v793Rise .42s ease both!important}
+#result.v781-question-mode .v781-option{transition:transform .16s ease,filter .16s ease!important}
+#result.v781-question-mode .v781-option:hover{transform:translateX(7px) scale(1.012)!important;filter:brightness(1.08)}
+.v793-score{animation:v793Score .45s ease!important}.v793-wrong{animation:v793Shake .4s ease!important}.v793-pop{animation:v793Pop .45s ease!important}
+.v793-particles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}.v793-particle{position:absolute;bottom:-30px;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.32);box-shadow:0 0 12px rgba(46,230,255,.45);animation:v793Particle var(--dur) linear infinite;animation-delay:var(--delay)}
+.app{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.v793-particle{display:none!important}body::before,.game-card,.game-icon,.brand,.btn.green,#enterBtn,#playBtn,.stat b,.count,.badge{animation:none!important}}
+</style><script id="v793-motion-controller">
+(function(){'use strict';
+function restart(el,cls){if(!el)return;el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(function(){el.classList.remove(cls)},650)}
+function init(){
+  if(!document.querySelector('.v793-particles')){var p=document.createElement('div');p.className='v793-particles';for(var i=0;i<18;i++){var d=document.createElement('i');d.className='v793-particle';d.style.left=((i*37)%97)+'%';d.style.setProperty('--dur',(8+(i%6)*1.7)+'s');d.style.setProperty('--delay',(-i*.73)+'s');d.style.setProperty('--drift',((-40+(i*23)%80))+'px');p.appendChild(d)}document.body.prepend(p)}
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.btn,[role="button"]');if(b)restart(b,'v793-pop')},true);
+  var prev={};
+  new MutationObserver(function(ms){ms.forEach(function(m){var el=m.target.nodeType===1?m.target:m.target.parentElement;if(!el)return;var id=el.id||'';var cl=String(el.className||'');var t=(el.textContent||'').trim();
+    if(/score|point|điểm/i.test(id+' '+cl) && prev[id+cl]!==undefined && prev[id+cl]!==t) restart(el,'v793-score');
+    if(/sai|wrong|không đúng/i.test(t)) restart(el,'v793-wrong'); else if(/đúng|correct|chính xác|học sinh được chọn/i.test(t)) restart(el,'v793-pop');
+    prev[id+cl]=t;
+  })}).observe(document.body,{subtree:true,childList:true,characterData:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script></head><body><style id="v758-subject-dialog-style">
 #v758SubjectDialog{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(20,37,62,.48);backdrop-filter:blur(3px)}
 #v758SubjectDialog.v758-visible{display:flex}
 #v758SubjectDialog .v758-panel{width:min(100%,460px);max-height:calc(100dvh - 36px);overflow:auto;box-sizing:border-box;border-radius:20px;background:#fff;box-shadow:0 24px 70px rgba(18,35,60,.25);padding:24px;color:#1b2e49;font-family:inherit}
@@ -7075,62 +7126,4 @@ body:has(#result.v781-question-mode) #winnerName{
   #result.v781-question-mode .v781-option{min-height:44px!important}
 }
 </style>
-<style id="v792-global-animation-system">
-/* V7.92 - Animation layer only. No layout/color/function changes. */
-@keyframes v792FadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes v792Pop{0%{opacity:0;transform:scale(.94)}70%{opacity:1;transform:scale(1.025)}100%{transform:scale(1)}}
-@keyframes v792Pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-@keyframes v792Glow{0%,100%{filter:drop-shadow(0 0 0 rgba(37,99,235,0))}50%{filter:drop-shadow(0 7px 13px rgba(37,99,235,.22))}}
-@keyframes v792Score{0%{transform:scale(1)}35%{transform:scale(1.18)}100%{transform:scale(1)}}
-@keyframes v792Shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
-@keyframes v792Correct{0%{transform:scale(.985)}45%{transform:scale(1.025)}100%{transform:scale(1)}}
-@keyframes v792Reveal{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-@keyframes v792Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes v792Shine{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(220%) skewX(-18deg)}}
-body.v792-ready button,.v792-ready .btn,.v792-ready [role="button"]{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease!important}
-body.v792-ready button:hover,.v792-ready .btn:hover,.v792-ready [role="button"]:hover{transform:translateY(-2px);filter:brightness(1.025)}
-body.v792-ready button:active,.v792-ready .btn:active,.v792-ready [role="button"]:active{transform:translateY(0) scale(.97)}
-.v792-enter{animation:v792FadeUp .42s cubic-bezier(.2,.8,.2,1) both}
-.v792-pop{animation:v792Pop .4s cubic-bezier(.2,.85,.25,1) both}
-.v792-score-pop{animation:v792Score .38s ease both}
-.v792-correct{animation:v792Correct .38s ease both}
-.v792-wrong{animation:v792Shake .34s ease both}
-.v792-reveal{animation:v792Reveal .34s ease both}
-/* Game cards: motion without changing their visual design */
-.v792-game-card{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease!important}
-.v792-game-card:hover{transform:translateY(-5px) scale(1.012);box-shadow:0 14px 28px rgba(15,23,42,.14)!important}
-.v792-game-card::after{content:"";position:absolute;top:-20%;left:-35%;width:18%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-140%) skewX(-18deg);pointer-events:none}
-.v792-game-card:hover::after{animation:v792Shine .75s ease}
-.v792-game-icon{display:inline-block;animation:v792Float 2.8s ease-in-out infinite}
-/* Questions and options */
-#result.v781-question-mode .v781-qcard{animation:v792Reveal .34s ease both}
-#result.v781-question-mode .v781-option{transition:transform .16s ease,box-shadow .16s ease,filter .16s ease!important}
-#result.v781-question-mode .v781-option:hover{transform:translateX(4px);filter:brightness(1.02)}
-#result.v781-question-mode #resultName{animation:v792Pop .42s ease both}
-/* Modals / panels */
-.info-modal.show .info-box,.modal.show .modal-content,[class*="modal"].show>[class*="box"]{animation:v792Pop .28s ease both}
-/* Respect accessibility */
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
-</style>
-<script id="v792-global-animation-controller">
-(function(){'use strict';
-function restart(el,cls){if(!el)return;el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(function(){el.classList.remove(cls)},700)}
-function txt(el){return (el&&el.textContent||'').trim()}
-function init(){document.body.classList.add('v792-ready');
-  var selectors=['.game-card','.gameCard','[class*="game-card"]','[class*="gameCard"]'];
-  var cards=[];selectors.forEach(function(q){document.querySelectorAll(q).forEach(function(el){if(cards.indexOf(el)<0)cards.push(el)})});
-  cards.forEach(function(el,i){el.classList.add('v792-game-card');el.style.animationDelay=Math.min(i*55,330)+'ms';el.classList.add('v792-enter');var icon=el.querySelector('.icon,.game-icon,[class*="icon"],svg');if(icon)icon.classList.add('v792-game-icon')});
-  document.querySelectorAll('main>*,.container>section,.app>section').forEach(function(el,i){if(i<10){el.classList.add('v792-enter');el.style.animationDelay=(i*35)+'ms'}});
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-var last=new WeakMap();
-var obs=new MutationObserver(function(ms){ms.forEach(function(m){var el=m.target.nodeType===1?m.target:m.target.parentElement;if(!el)return;
-  if(el.matches&&el.matches('#result,#resultName,.v781-feedback,.v785-correct,.v785-wrong,[class*="score"],[id*="score"],[class*="point"],[id*="point"]')){var now=txt(el),prev=last.get(el);if(prev!==undefined&&now!==prev){var low=(el.className+' '+el.id+' '+now).toLowerCase();if(/đúng|correct|chính xác/.test(low))restart(el,'v792-correct');else if(/sai|wrong|không đúng/.test(low))restart(el,'v792-wrong');else if(/score|point|điểm/.test(low))restart(el,'v792-score-pop');else restart(el,'v792-reveal')}last.set(el,now)}
-  if(el.querySelectorAll){el.querySelectorAll('.v781-qcard,.v781-feedback').forEach(function(x){if(!x.dataset.v792seen){x.dataset.v792seen='1';restart(x,'v792-reveal')}})}
-})});
-obs.observe(document.body,{subtree:true,childList:true,characterData:true});
-/* Event feedback for controls, without intercepting app logic */
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.btn,[role="button"]');if(b)restart(b,'v792-pop')},false);
-})();
-</script>
 </body></html>';
