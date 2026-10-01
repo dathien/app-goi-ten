@@ -1957,7 +1957,7 @@ function onCancel(){done(null)}function onBackdrop(e){if(e.target===dialog)done(
 <div class="actions" style="justify-content:center;margin-top:14px">
 <input id="appNameInput" value="APP GỌI TÊN" maxlength="50" style="max-width:350px;text-align:center;font-weight:900">
 <button class="btn secondary v729-current-class-readable" id="saveAppNameBtn">✏️ Cập nhật tên app</button>
-</div><p class="subtitle">Gameshow tương tác dành cho lớp học hiện đại • v7.9.6 • Thi đấu lớp/nhóm</p><div style="margin-top:14px"></div></div><div class="glass info-strip"><div><strong>Biến hoạt động gọi tên thành một gameshow hấp dẫn</strong><div class="small">6 trò chơi, bảng điểm, chia nhóm và câu hỏi ngẫu nhiên trong một file HTML offline.</div></div><div class="actions"><button class="btn secondary" id="introBtn">ⓘ Giới thiệu ứng dụng</button><button class="btn secondary" id="guideBtn">❔ Hướng dẫn sử dụng</button></div></div><div class="setup-grid"><div class="glass panel"><label>Danh sách học sinh</label><textarea id="studentInput" placeholder="Mỗi học sinh một dòng&#10;Có thể nhập: Nguyễn Văn An | 01"></textarea><div class="actions" style="margin-top:12px"><button class="btn secondary" id="sampleBtn">Dùng danh sách mẫu</button><button class="btn secondary" id="clearBtn">Xóa danh sách</button></div></div><div class="glass panel"><div class="count"><span id="studentCount">0</span>/50 học sinh</div><p class="tip v733-student-hint">Nhập từ 2 đến 50 học sinh. Khi tên bị trùng, app tự thêm số phân biệt. Có thể nhập mã sau dấu <b>|</b>.</p><label><input type="checkbox" id="noRepeat" style="width:auto"> Ưu tiên học sinh chưa được gọi</label><div class="actions" style="margin-top:18px"><button class="btn green" id="enterBtn">Vào chơi</button></div><p id="setupMsg" class="small"></p></div></div><div class="app-footer"><b></b> • Thiết kế cho lớp học hiện đại</div></div></section>
+</div><p class="subtitle">Gameshow tương tác cho lớp học • V8.2 • Thi đấu cá nhân & nhóm</p><div style="margin-top:14px"></div></div><div class="glass info-strip"><div><strong>Biến hoạt động gọi tên thành một gameshow hấp dẫn</strong><div class="small">6 trò chơi, bảng điểm, chia nhóm và câu hỏi ngẫu nhiên trong một file HTML offline.</div></div><div class="actions"><button class="btn secondary" id="introBtn">ⓘ Giới thiệu ứng dụng</button><button class="btn secondary" id="guideBtn">❔ Hướng dẫn sử dụng</button></div></div><div class="setup-grid"><div class="glass panel"><label>Danh sách học sinh</label><textarea id="studentInput" placeholder="Mỗi học sinh một dòng&#10;Có thể nhập: Nguyễn Văn An | 01"></textarea><div class="actions" style="margin-top:12px"><button class="btn secondary" id="sampleBtn">Dùng danh sách mẫu</button><button class="btn secondary" id="clearBtn">Xóa danh sách</button></div></div><div class="glass panel"><div class="count"><span id="studentCount">0</span>/50 học sinh</div><p class="tip v733-student-hint">Nhập từ 2 đến 50 học sinh. Khi tên bị trùng, app tự thêm số phân biệt. Có thể nhập mã sau dấu <b>|</b>.</p><label><input type="checkbox" id="noRepeat" style="width:auto"> Ưu tiên học sinh chưa được gọi</label><div class="actions" style="margin-top:18px"><button class="btn green" id="enterBtn">Vào chơi</button></div><p id="setupMsg" class="small"></p></div></div></div></section>
 <section id="menu" class="screen"><div class="shell"><div class="topbar"><div><div class="brand app-name-display" style="font-size:34px">APP GỌI TÊN</div><div class="small"> • <b></b></div></div><div class="top-actions"><button class="btn secondary" id="menuIntroBtn">ⓘ Giới thiệu</button><button class="btn secondary" id="menuGuideBtn">❔ Hướng dẫn</button><button class="btn secondary" id="editListBtn">Danh sách</button><button class="btn secondary" id="soundBtn">🔊 Âm thanh</button><button class="btn secondary" id="fullBtn">⛶ Toàn màn hình</button></div></div><div class="stats"><div class="glass stat"><span>Tổng học sinh</span><b id="statTotal">0</b></div><div class="glass stat"><span>Đã gọi</span><b id="statCalled">0</b></div><div class="glass stat"><span>Còn lại</span><b id="statRemain">0</b></div><div class="glass stat"><span>Câu hỏi</span><b id="statQuestions">0</b></div></div>
 <div class="glass panel" id="playModePanel" style="margin-top:18px">
   <div class="topbar"><div><h3 style="margin:0">🎮 CHỌN CHẾ ĐỘ CHƠI</h3><div class="small">Hai hệ điểm độc lập. TOP LỚP và TOP NHÓM không cộng gộp.</div></div><div class="mode-badge-v6" id="modeStatusV6">Đang chơi: CẢ LỚP</div></div>
@@ -3917,7 +3917,7 @@ const oldEnter=$('#enterBtn')?.onclick;if($('#enterBtn'))$('#enterBtn').onclick=
 })();
 </script>
 
-<footer style="position:relative;z-index:2;text-align:center;padding:18px 12px 24px;color:rgba(255,255,255,.72);font-size:13px;font-weight:700;letter-spacing:.3px">copyright@2026</footer>
+
 <script id="v67-unified-question-migration">
 (function(){
   async function migrateLegacyQuestions(){
@@ -7096,5 +7096,25 @@ body:has(#result.v781-question-mode) #winnerName{
   #result.v781-question-mode .v781-options{grid-template-columns:1fr!important}
   #result.v781-question-mode .v781-option{min-height:44px!important}
 }
+</style>
+
+<style id="v820-uiux-final-polish">
+:root{--ui-navy:#17324d!important;--ui-blue:#2f6fed!important;--ui-blue2:#4f83f1!important;--ui-cyan:#2f6fed!important;--ui-bg:#f7f8fa!important;--ui-surface:#ffffff!important;--ui-soft:#f2f5f9!important;--ui-border:#e2e7ee!important;--ui-text:#1f2d3d!important;--ui-muted:#66758a!important;--ui-shadow:0 10px 28px rgba(25,42,62,.08)!important}
+html,body{background:#f7f8fa!important;color:var(--ui-text)!important}
+body:before{display:none!important}
+.screen{background:transparent!important}
+.hero{background:linear-gradient(135deg,#17324d 0%,#234f7a 62%,#2f6fed 100%)!important;box-shadow:0 16px 38px rgba(23,50,77,.16)!important}
+.glass,.panel,.rank-box,.mode-panel-v6,.group-card-v6,.game-card,#v747Manager,.result{background:#fff!important;border-color:#e2e7ee!important;box-shadow:0 8px 24px rgba(25,42,62,.07)!important}
+.info-strip,.topbar{background:#fff!important;border-color:#e2e7ee!important;box-shadow:0 5px 18px rgba(25,42,62,.055)!important}
+.game-stage{background:#fff!important;border-color:#e2e7ee!important;box-shadow:0 8px 26px rgba(25,42,62,.07)!important}
+.game-card:before{background:#2f6fed!important}.game-card:after{display:none!important}.game-icon{background:#f1f5fb!important;color:#2f6fed!important}.game-card .badge{background:#f1f5fb!important;color:#2f6fed!important;border-color:#dce6f5!important}
+.btn{background:#2f6fed!important;box-shadow:0 5px 14px rgba(47,111,237,.16)!important}.btn:hover{background:#285fce!important;box-shadow:0 8px 18px rgba(47,111,237,.20)!important}.btn.secondary,.btn.back{background:#fff!important;color:#29435f!important;border-color:#d7dee8!important;box-shadow:none!important}.btn.secondary:hover,.btn.back:hover{background:#f4f6f9!important;border-color:#bcc8d6!important}.btn.green{background:#18864b!important}
+textarea,input,select{border-color:#d7dee8!important;box-shadow:none!important}textarea:focus,input:focus,select:focus{border-color:#2f6fed!important;box-shadow:0 0 0 3px rgba(47,111,237,.10)!important}
+th{background:#f3f5f8!important}.stat{border-top-color:#2f6fed!important}.score-btn{background:#2f6fed!important}
+.app-footer{display:none!important}
+footer{display:none!important}
+/* prevent empty decorative labels from leaving visible bullets */
+.topbar .small:has(b:empty){display:none!important}
+@media(max-width:600px){html,body{background:#f7f8fa!important}.hero{background:linear-gradient(145deg,#17324d,#2f6fed)!important}}
 </style>
 </body></html>';
