@@ -7075,4 +7075,62 @@ body:has(#result.v781-question-mode) #winnerName{
   #result.v781-question-mode .v781-option{min-height:44px!important}
 }
 </style>
+<style id="v792-global-animation-system">
+/* V7.92 - Animation layer only. No layout/color/function changes. */
+@keyframes v792FadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes v792Pop{0%{opacity:0;transform:scale(.94)}70%{opacity:1;transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes v792Pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes v792Glow{0%,100%{filter:drop-shadow(0 0 0 rgba(37,99,235,0))}50%{filter:drop-shadow(0 7px 13px rgba(37,99,235,.22))}}
+@keyframes v792Score{0%{transform:scale(1)}35%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes v792Shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@keyframes v792Correct{0%{transform:scale(.985)}45%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes v792Reveal{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes v792Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes v792Shine{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(220%) skewX(-18deg)}}
+body.v792-ready button,.v792-ready .btn,.v792-ready [role="button"]{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease!important}
+body.v792-ready button:hover,.v792-ready .btn:hover,.v792-ready [role="button"]:hover{transform:translateY(-2px);filter:brightness(1.025)}
+body.v792-ready button:active,.v792-ready .btn:active,.v792-ready [role="button"]:active{transform:translateY(0) scale(.97)}
+.v792-enter{animation:v792FadeUp .42s cubic-bezier(.2,.8,.2,1) both}
+.v792-pop{animation:v792Pop .4s cubic-bezier(.2,.85,.25,1) both}
+.v792-score-pop{animation:v792Score .38s ease both}
+.v792-correct{animation:v792Correct .38s ease both}
+.v792-wrong{animation:v792Shake .34s ease both}
+.v792-reveal{animation:v792Reveal .34s ease both}
+/* Game cards: motion without changing their visual design */
+.v792-game-card{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease!important}
+.v792-game-card:hover{transform:translateY(-5px) scale(1.012);box-shadow:0 14px 28px rgba(15,23,42,.14)!important}
+.v792-game-card::after{content:"";position:absolute;top:-20%;left:-35%;width:18%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-140%) skewX(-18deg);pointer-events:none}
+.v792-game-card:hover::after{animation:v792Shine .75s ease}
+.v792-game-icon{display:inline-block;animation:v792Float 2.8s ease-in-out infinite}
+/* Questions and options */
+#result.v781-question-mode .v781-qcard{animation:v792Reveal .34s ease both}
+#result.v781-question-mode .v781-option{transition:transform .16s ease,box-shadow .16s ease,filter .16s ease!important}
+#result.v781-question-mode .v781-option:hover{transform:translateX(4px);filter:brightness(1.02)}
+#result.v781-question-mode #resultName{animation:v792Pop .42s ease both}
+/* Modals / panels */
+.info-modal.show .info-box,.modal.show .modal-content,[class*="modal"].show>[class*="box"]{animation:v792Pop .28s ease both}
+/* Respect accessibility */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+<script id="v792-global-animation-controller">
+(function(){'use strict';
+function restart(el,cls){if(!el)return;el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(function(){el.classList.remove(cls)},700)}
+function txt(el){return (el&&el.textContent||'').trim()}
+function init(){document.body.classList.add('v792-ready');
+  var selectors=['.game-card','.gameCard','[class*="game-card"]','[class*="gameCard"]'];
+  var cards=[];selectors.forEach(function(q){document.querySelectorAll(q).forEach(function(el){if(cards.indexOf(el)<0)cards.push(el)})});
+  cards.forEach(function(el,i){el.classList.add('v792-game-card');el.style.animationDelay=Math.min(i*55,330)+'ms';el.classList.add('v792-enter');var icon=el.querySelector('.icon,.game-icon,[class*="icon"],svg');if(icon)icon.classList.add('v792-game-icon')});
+  document.querySelectorAll('main>*,.container>section,.app>section').forEach(function(el,i){if(i<10){el.classList.add('v792-enter');el.style.animationDelay=(i*35)+'ms'}});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+var last=new WeakMap();
+var obs=new MutationObserver(function(ms){ms.forEach(function(m){var el=m.target.nodeType===1?m.target:m.target.parentElement;if(!el)return;
+  if(el.matches&&el.matches('#result,#resultName,.v781-feedback,.v785-correct,.v785-wrong,[class*="score"],[id*="score"],[class*="point"],[id*="point"]')){var now=txt(el),prev=last.get(el);if(prev!==undefined&&now!==prev){var low=(el.className+' '+el.id+' '+now).toLowerCase();if(/đúng|correct|chính xác/.test(low))restart(el,'v792-correct');else if(/sai|wrong|không đúng/.test(low))restart(el,'v792-wrong');else if(/score|point|điểm/.test(low))restart(el,'v792-score-pop');else restart(el,'v792-reveal')}last.set(el,now)}
+  if(el.querySelectorAll){el.querySelectorAll('.v781-qcard,.v781-feedback').forEach(function(x){if(!x.dataset.v792seen){x.dataset.v792seen='1';restart(x,'v792-reveal')}})}
+})});
+obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+/* Event feedback for controls, without intercepting app logic */
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button,.btn,[role="button"]');if(b)restart(b,'v792-pop')},false);
+})();
+</script>
 </body></html>';
