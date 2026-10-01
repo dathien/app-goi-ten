@@ -6869,6 +6869,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 .v789-turn-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 .v789-next,.v789-end{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:850;cursor:pointer;box-shadow:0 6px 16px rgba(15,54,92,.12)}
 .v789-next{background:#146b50;color:#fff}.v789-end{background:#eef3f8;color:#17365b;border:1px solid #c8d6e5}.v789-next:hover,.v789-end:hover{transform:translateY(-1px)}
+.v791-turn-summary{font-weight:850;color:#17365b;background:#eef7f2;border:1px solid #cde7d8;border-radius:12px;padding:10px 14px;text-align:center}
 @media(max-width:700px){.v781-options{grid-template-columns:1fr}.v781-qcard{padding:12px}.v781-qtext{font-size:18px}}
 </style>
 <style id="v785-explanation-style">
@@ -6877,7 +6878,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </style>
 <script id="v781-six-game-question-engine">
 (function(){
-  var used=[], turn={student:null,count:0,correct:0,max:5};
+  var used=[], turn={student:null,count:0,correct:0,max:5,startScore:0};
   function esc781(v){return String(v==null?'':v).replace(/[&<>\"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]})}
   function valid(q){return q&&String(q.text||'').trim()&&q.options&&['A','B','C','D'].every(function(k){return String(q.options[k]||'').trim()})&&['A','B','C','D'].includes(String(q.answer||'').toUpperCase())}
   function normalize(q,i,sub){
@@ -6896,31 +6897,31 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   function sameStudent(a,b){return !!(a&&b)&&String(a.id||a.code||a.display||'')===String(b.id||b.code||b.display||'')}
   function renderQuestion(w,isNext){
     var box=document.getElementById('questionResult'),result=document.getElementById('result');if(!box||!result)return;
-    if(!isNext||!sameStudent(turn.student,w)){turn={student:w,count:0,correct:0,max:5}}
+    if(!isNext||!sameStudent(turn.student,w)){var ss=(w&&window.state)?(+state.scores[w.id]||0):0;turn={student:w,count:0,correct:0,max:5,startScore:ss}}
     var q=nextQuestion();result.classList.add('v781-question-mode');result.classList.remove('v782-answered','v789-ended');
     if(!q){box.innerHTML='<div class="v781-qcard"><div class="v781-feedback">⚠️ Môn đang chọn chưa có câu hỏi hợp lệ. Hãy kiểm tra nội dung câu hỏi, đủ A–D và đáp án đúng.</div></div>';return}
     turn.count++;
     var ans=String(q.answer).toUpperCase(),student=esc781(w?.display||w?.code||'học sinh');
-    box.innerHTML='<div class="v781-qcard"><div class="v789-progress">Câu '+turn.count+'/'+turn.max+' · Đúng '+turn.correct+'/'+(turn.count-1)+'</div><div class="v781-kicker">🎯 Câu hỏi dành cho '+student+'</div><div class="v781-qtext">'+esc781(q.text)+'</div><div class="v781-options">'+['A','B','C','D'].map(function(k){return '<button type="button" class="v781-option" data-k="'+k+'"><span class="v781-letter">'+k+'</span><span>'+esc781(q.options[k])+'</span></button>'}).join('')+'</div><div class="v781-feedback" id="v781Feedback">Chọn một đáp án A–D</div><div class="v789-turn-actions" id="v789TurnActions" hidden></div></div>';
+    box.innerHTML='<div class="v781-qcard"><div class="v789-progress">Câu '+turn.count+'/'+turn.max+' · Đúng '+turn.correct+'/'+(turn.count-1)+' · Điểm lượt +'+turn.correct+' · Tổng '+((w&&window.state)?(+state.scores[w.id]||0):turn.startScore)+'</div><div class="v781-kicker">🎯 Câu hỏi dành cho '+student+'</div><div class="v781-qtext">'+esc781(q.text)+'</div><div class="v781-options">'+['A','B','C','D'].map(function(k){return '<button type="button" class="v781-option" data-k="'+k+'"><span class="v781-letter">'+k+'</span><span>'+esc781(q.options[k])+'</span></button>'}).join('')+'</div><div class="v781-feedback" id="v781Feedback">Chọn một đáp án A–D</div><div class="v789-turn-actions" id="v789TurnActions" hidden></div></div>';
     box.querySelectorAll('.v781-option').forEach(function(btn){btn.onclick=function(){
       if(box.dataset.answered==='1')return;box.dataset.answered='1';var k=btn.dataset.k,ok=k===ans;
       box.querySelectorAll('.v781-option').forEach(function(b){b.disabled=true;if(b.dataset.k===ans)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');
       if(ok)turn.correct++;
       var fb=document.getElementById('v781Feedback');if(fb){var correctText=ans+'. '+String(q.options[ans]||''),exp=String(q.explanation||'').trim();if(typeof v788IsInvalidExplanation==='function'&&v788IsInvalidExplanation(exp))exp='';var base=ok?'✅ <b>Chính xác! +1 điểm</b>':'❌ <b>Chưa chính xác.</b><div class="v785-wrong">Em đã chọn: <b>'+esc781(k+'. '+String(q.options[k]||''))+'</b></div>';base+='<div class="v785-correct">Đáp án đúng: <b>'+esc781(correctText)+'</b></div>';if(exp)base+='<div class="v785-explain">💡 <b>Giải thích:</b> '+esc781(exp)+'</div>';fb.innerHTML=base}
       result.classList.add('v782-answered');
-      if(ok&&w&&window.state){state.scores[w.id]=(state.scores[w.id]||0)+1;try{renderMenu()}catch(e){}}
+      if(ok&&w&&window.state){if(typeof window.awardPointV6==='function'){window.awardPointV6(w,1)}else{state.scores[w.id]=(state.scores[w.id]||0)+1;try{if(typeof saveCompV6==='function')saveCompV6()}catch(e){}try{renderMenu()}catch(e){}}}
       try{if(ok){Sound.win();confetti()}}catch(e){}
       var acts=document.getElementById('v789TurnActions');if(acts){acts.hidden=false;acts.innerHTML=(turn.count<turn.max?'<button type="button" class="v789-next" id="v789NextQuestion">➡ Câu tiếp theo</button>':'')+'<button type="button" class="v789-end" id="v789EndTurn">✓ Kết thúc lượt</button>';}
-      var prog=box.querySelector('.v789-progress');if(prog)prog.textContent='Câu '+turn.count+'/'+turn.max+' · Đúng '+turn.correct+'/'+turn.count;
+      var prog=box.querySelector('.v789-progress');if(prog)prog.textContent='Câu '+turn.count+'/'+turn.max+' · Đúng '+turn.correct+'/'+turn.count+' · Điểm lượt +'+turn.correct+' · Tổng '+((w&&window.state)?(+state.scores[w.id]||0):(turn.startScore+turn.correct));
     }});
     delete box.dataset.answered;try{if(typeof typesetMath==='function')typesetMath(box)}catch(e){}
   }
-  function endTurn(){var r=document.getElementById('result'),box=document.getElementById('questionResult');if(r){r.classList.add('v789-ended','v782-answered')}if(box){var acts=document.getElementById('v789TurnActions');if(acts)acts.innerHTML='<div style="font-weight:850;color:#17365b">✓ Kết thúc lượt: đúng '+turn.correct+'/'+turn.count+' câu</div>'}var p=document.getElementById('playAgainBtn');if(p)p.textContent='▶ Chơi tiếp';}
+  function endTurn(){var r=document.getElementById('result'),box=document.getElementById('questionResult');if(r){r.classList.add('v789-ended','v782-answered')}var total=(turn.student&&window.state)?(+state.scores[turn.student.id]||0):(turn.startScore+turn.correct);if(box){var acts=document.getElementById('v789TurnActions');if(acts)acts.innerHTML='<div class="v791-turn-summary">✓ Kết thúc lượt: đúng <b>'+turn.correct+'/'+turn.count+'</b> câu · <b>+'+turn.correct+' điểm</b> · Tổng <b>'+total+' điểm</b></div>'}var p=document.getElementById('playAgainBtn');if(p)p.textContent='▶ Chơi tiếp';}
   window.showWinnerChallengeV781=function(w){renderQuestion(w,false)};
   document.addEventListener('click',function(e){
     var next=e.target&&e.target.closest&&e.target.closest('#v789NextQuestion');if(next){e.preventDefault();e.stopImmediatePropagation();renderQuestion(turn.student,true);return}
     var end=e.target&&e.target.closest&&e.target.closest('#v789EndTurn');if(end){e.preventDefault();e.stopImmediatePropagation();endTurn();return}
-    if(e.target&&e.target.id==='playAgainBtn'){var r=document.getElementById('result');if(r)r.classList.remove('v781-question-mode','v782-answered','v789-ended');var q=document.getElementById('questionResult');if(q){q.innerHTML='';delete q.dataset.answered}turn={student:null,count:0,correct:0,max:5}}
+    if(e.target&&e.target.id==='playAgainBtn'){var r=document.getElementById('result');if(r)r.classList.remove('v781-question-mode','v782-answered','v789-ended');var q=document.getElementById('questionResult');if(q){q.innerHTML='';delete q.dataset.answered}turn={student:null,count:0,correct:0,max:5,startScore:0}}
   },true);
 })();
 </script>
