@@ -7201,4 +7201,42 @@ footer{display:none!important}
 .topbar .small:has(b:empty){display:none!important}
 @media(max-width:600px){html,body{background:#f7f8fa!important}.hero{background:linear-gradient(145deg,#17324d,#2f6fed)!important}}
 </style>
+
+<style id="v910-setup-header-redesign">
+/* V9.1 — sửa riêng màn hình mở đầu: compact app bar, tương phản chuẩn, không còn form cấu hình phóng lớn */
+#setup .hero{
+  min-height:0!important;padding:18px 22px!important;border-radius:20px!important;
+  background:linear-gradient(120deg,#12366d 0%,#1d4ed8 100%)!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:18px!important;
+  box-shadow:0 14px 34px rgba(15,47,103,.18)!important;text-align:left!important;overflow:visible!important
+}
+#setup .hero>.brand{
+  color:#fff!important;font-size:clamp(28px,3vw,42px)!important;line-height:1.05!important;
+  font-weight:950!important;letter-spacing:.4px!important;margin:0!important;text-shadow:none!important
+}
+/* Giữ chức năng đổi tên trong DOM nhưng không để form cấu hình chiếm màn hình mở đầu */
+#setup .hero>.actions,#setup .hero>.subtitle,#setup .hero>div[style*="margin-top:14px"]{display:none!important}
+#setup .hero .mc-toolbar{
+  margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  gap:9px!important;position:static!important;background:transparent!important;border:0!important;box-shadow:none!important
+}
+#setup .hero .mc-current,#setup .hero [data-mc-open]{
+  min-height:40px!important;border-radius:12px!important;padding:9px 13px!important;font-size:13px!important;font-weight:850!important
+}
+#setup .hero .mc-current{background:rgba(255,255,255,.14)!important;color:#fff!important;border:1px solid rgba(255,255,255,.28)!important}
+#setup .hero [data-mc-open]{background:#fff!important;color:#173a72!important;border:1px solid rgba(255,255,255,.7)!important;box-shadow:0 6px 16px rgba(7,25,58,.14)!important}
+#setup .info-strip{margin-top:14px!important;border-radius:18px!important;padding:15px 18px!important}
+#setup .info-strip strong{color:#173a72!important;font-size:16px!important}
+#setup .info-strip .small{color:#64748b!important}
+#setup .setup-grid{margin-top:14px!important}
+@media(max-width:760px){
+ #setup .hero{grid-template-columns:1fr!important;padding:17px!important;gap:12px!important}
+ #setup .hero .mc-toolbar{justify-content:flex-start!important;flex-wrap:wrap!important}
+ #setup .hero>.brand{font-size:30px!important}
+}
+@media(max-width:480px){
+ #setup .hero{border-radius:16px!important;padding:15px!important}
+ #setup .hero .mc-current,#setup .hero [data-mc-open]{width:100%!important;justify-content:center!important}
+}
+</style>
 </body></html>';
