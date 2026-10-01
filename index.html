@@ -3059,7 +3059,7 @@ function renderWheel(){
       <button type="button" id="wheelSpinBtn" class="wheel-hub-v717 wheel-spin-btn-v718" aria-label="Quay vòng quay">QUAY</button>
     </div>
    </div>
-   <div class="wheel-count-v717">${n} học sinh • ${n} ô</div>
+   
   </div>`;
 }function playWheel(w){
  const wheel=$('#wheel');if(!wheel||!w){state.running=false;$('#playBtn').disabled=false;return}
@@ -6778,9 +6778,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(old)old.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();var subject=document.getElementById('v747Subject'),classSubject=document.getElementById('v756ClassSubject');if(subject&&classSubject&&classSubject.value&&subject.value!==classSubject.value){subject.value=classSubject.value;subject.dispatchEvent(new Event('change',{bubbles:true}));}else use.click();},true);
  }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot()})();
 </script>\n<style id="v781-six-game-question-style">
-#result.v781-question-mode{max-width:920px;margin:18px auto 0;padding:18px 20px;text-align:left}
-#result.v781-question-mode .small:first-child{text-align:center;font-weight:800;letter-spacing:.08em}
-#result.v781-question-mode #resultName{text-align:center;margin-bottom:12px}
+#result.v781-question-mode{max-width:980px;margin:12px auto 0;padding:18px 20px;text-align:left;background:rgba(255,255,255,.98);border:2px solid #d8e6f7;box-shadow:0 14px 38px rgba(0,0,0,.22)}
+#result.v781-question-mode .small:first-child{text-align:center;font-weight:950;letter-spacing:.09em;color:#17365f!important;font-size:15px!important;opacity:1!important}
+#result.v781-question-mode #resultName{text-align:center;margin:4px 0 14px;color:#102d55!important;text-shadow:none!important;font-size:clamp(32px,5vw,62px)!important;line-height:1.08!important;font-weight:950!important}
+#result.v781-question-mode #askBtn,#result.v781-question-mode #plusPointBtn{display:none!important}
+#result.v781-question-mode #playAgainBtn{display:none}
+#result.v781-question-mode.v782-answered #playAgainBtn{display:inline-flex}
+#result.v781-question-mode .actions{margin-top:8px!important}
+#result.v781-question-mode #questionResult{margin-top:0!important;background:transparent!important;padding:0!important;color:#102d55!important}
 .v781-qcard{background:#fff;border:1px solid #cfe0f5;border-radius:18px;padding:16px;box-shadow:0 10px 28px rgba(15,54,92,.08)}
 .v781-kicker{text-align:center;font-size:12px;font-weight:900;color:#0b6b62;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
 .v781-qtext{font-size:clamp(18px,2.2vw,26px);font-weight:850;line-height:1.45;color:#102d55;margin:4px 0 14px;text-align:center}
@@ -6798,7 +6803,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   var used=[];
   function esc781(v){return String(v==null?'':v).replace(/[&<>\"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]})}
   function valid(q){return q&&String(q.text||'').trim()&&q.options&&['A','B','C','D'].every(function(k){return String(q.options[k]||'').trim()})&&['A','B','C','D'].includes(String(q.answer||'').toUpperCase())}
-  function bank(){return (window.state&&Array.isArray(state.questionBank)?state.questionBank:[]).filter(valid)}
+  function bank(){var a=(window.state&&Array.isArray(state.questionBank)?state.questionBank:[]).filter(valid);if(a.length)return a;try{var sub=subject();if(typeof BANK!=='undefined'&&BANK&&Array.isArray(BANK[sub]))return BANK[sub].map(function(x,i){return {id:'v782_'+i,text:x[0],options:{A:x[1][0],B:x[1][1],C:x[1][2],D:x[1][3]},answer:x[2]}}).filter(valid)}catch(e){}return []}
   function nextQuestion(){
     var b=bank(); if(!b.length)return null;
     if(used.length>=b.length)used=[];
@@ -6808,7 +6813,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   function subject(){try{return localStorage.getItem('APP_GOI_TEN_ACTIVE_SUBJECT_V776')||document.getElementById('v747Subject')?.value||'Bộ câu hỏi đang dùng'}catch(e){return document.getElementById('v747Subject')?.value||'Bộ câu hỏi đang dùng'}}
   window.showWinnerChallengeV781=function(w){
     var box=document.getElementById('questionResult'),result=document.getElementById('result'); if(!box||!result)return;
-    var q=nextQuestion(); result.classList.add('v781-question-mode');
+    var q=nextQuestion(); result.classList.add('v781-question-mode'); result.classList.remove('v782-answered');
     if(!q){box.innerHTML='<div class="v781-qcard"><div class="v781-feedback">⚠️ Chưa có bộ câu hỏi hợp lệ để dùng cho trò chơi. Hãy chọn môn và bấm “Dùng bộ câu hỏi môn này”.</div></div>';return}
     var ans=String(q.answer).toUpperCase();
     box.innerHTML='<div class="v781-qcard"><div class="v781-kicker">🎯 Câu hỏi dành cho '+esc781(w?.display||w?.code||'học sinh')+'</div><div class="v781-qtext">'+esc781(q.text)+'</div><div class="v781-options">'+['A','B','C','D'].map(function(k){return '<button type="button" class="v781-option" data-k="'+k+'"><span class="v781-letter">'+k+'</span><span>'+esc781(q.options[k])+'</span></button>'}).join('')+'</div><div class="v781-feedback" id="v781Feedback">Chọn một đáp án A–D</div><div class="v781-meta">📚 '+esc781(subject())+' · Câu hỏi dùng chung cho cả 6 trò chơi</div></div>';
@@ -6817,14 +6822,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       var k=btn.dataset.k,ok=k===ans;
       box.querySelectorAll('.v781-option').forEach(function(b){b.disabled=true;if(b.dataset.k===ans)b.classList.add('correct')});
       if(!ok)btn.classList.add('wrong');
-      var fb=document.getElementById('v781Feedback'); if(fb)fb.textContent=ok?'✅ Chính xác! +1 điểm':'❌ Chưa chính xác. Đáp án đúng: '+ans;
+      var fb=document.getElementById('v781Feedback'); if(fb)fb.textContent=ok?'✅ Chính xác! +1 điểm':'❌ Chưa chính xác. Đáp án đúng: '+ans; result.classList.add('v782-answered');
       if(ok&&w&&window.state){state.scores[w.id]=(state.scores[w.id]||0)+1;var pp=document.getElementById('plusPointBtn');if(pp)pp.textContent='✓ Đã cộng +1 điểm';try{renderMenu()}catch(e){}}
       try{if(ok){Sound.win();confetti()}}catch(e){}
     }});
     delete box.dataset.answered;
     try{if(typeof typesetMath==='function')typesetMath(box)}catch(e){}
   };
-  document.addEventListener('click',function(e){if(e.target&&e.target.id==='playAgainBtn'){var r=document.getElementById('result');if(r)r.classList.remove('v781-question-mode');var q=document.getElementById('questionResult');if(q){q.innerHTML='';delete q.dataset.answered}}},true);
+  document.addEventListener('click',function(e){if(e.target&&e.target.id==='playAgainBtn'){var r=document.getElementById('result');if(r)r.classList.remove('v781-question-mode','v782-answered');var q=document.getElementById('questionResult');if(q){q.innerHTML='';delete q.dataset.answered}}},true);
 })();
 </script>
 </body></html>';
